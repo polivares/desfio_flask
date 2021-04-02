@@ -1,0 +1,62 @@
+{% extends "layout.html"%}
+{% block body %}
+<style>
+    th, td {
+     border: 1px solid black;
+   }
+</style>
+<a href="{{ url_for('logout') }}" style="float: right;">Logout</a>
+<ul>
+    <li><b>Name:</b> {{first_name}} {{last_name}}</li>
+    <li><b>Account Balance:</b> ${{ money }}</li>
+</ul>
+
+<h4>List of people who are in need of help</h4>
+<table style="width:100%;border: 1px">
+    <tr>
+      <td><b>Name</b> </td>
+      <td><b>Money Needed For</b> </td>
+      <td><b>Description</b> </td>
+      <td><b>Amount Needed</b> </td>
+      <td><b>Amount Raised</b> </td>
+      <td><b>Action</b></td>
+    </tr>
+    {% for borrower in list_help %}
+    <tr>
+        <form  action="{{ url_for('lend') }}" method="POST">
+            <td>{{borrower.first_name}} {{borrower.last_name}}</td>
+            <td>{{borrower.money_for}}</td>
+            <td>{{borrower.description}}</td>
+            <td>{{borrower.needed_money}}</td>
+            <td>{{borrower.money}}</td>
+            <td>
+                <input type="number" name="lent_money" min="0" max="{{ [money, borrower.needed_money - borrower.money] | min}}" step="100">
+                <input type="hidden" name="id" value="{{borrower.id}}">
+                <button>Lend</button>
+                
+            </td>
+        </form>
+    </tr>
+    {% endfor%}
+</table> 
+<h4>List of people who are in need of help</h4>
+<table style="width:100%;border: 1px">
+    <tr>
+      <td><b>Name</b> </td>
+      <td><b>Money Needed For</b> </td>
+      <td><b>Description</b> </td>
+      <td><b>Amount Needed</b> </td>
+      <td><b>Amount Raised</b> </td>
+      <td><b>Amount Lent</b></td>
+    </tr>
+    {% for borrower in list_lent %}
+    <tr>
+        <td>{{borrower.first_name}} {{borrower.last_name}}</td>
+        <td>{{borrower.money_for}}</td>
+        <td>{{borrower.description}}</td>
+        <td>{{borrower.needed_money}}</td>
+        <td>{{borrower.money}}</td>
+        <td>{{borrower.mount_lent}}</td>
+    </tr>
+    {% endfor%}
+{% endblock %}

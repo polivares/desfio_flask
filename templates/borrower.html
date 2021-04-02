@@ -1,0 +1,29 @@
+{% extends "layout.html"%}
+{% block body %}
+<style>
+    th, td {
+     border: 1px solid black;
+   }
+</style>
+<a href="{{ url_for('logout') }}" style="float: right;">Logout</a>
+<ul>
+  <li><b>Name:</b> {{first_name}} {{last_name}}</li>
+  <li><b>Amount Needed:</b> ${{ needed_money }}</li>
+  <li><b>Amount Raised:</b> ${{ money }}</li>
+</ul>
+
+<h4>List of people who lent you money</h4>
+<table style="width:100%;border: 1px">
+    <tr>
+      <td><b>Name</b> </td>
+      <td><b>Email</b> </td>
+      <td><b>Amount Lent</b> </td>
+    </tr>
+    {% for lender in list_lender %}
+    <tr>
+        <td>{{lender.first_name}} {{lender.last_name}}</td>
+        <td>{{lender.email}}</td>
+        <td>{{lender.mount_lent}}</td>
+    </tr>
+    {% endfor%}
+{% endblock %}

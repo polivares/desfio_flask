@@ -1,0 +1,28 @@
+{% extends "layout.html"%}
+{% block body %}
+<h1>Login</h1>
+<form action="{{ url_for('login') }}" method="post">
+    <table style="width:50%">
+        <tr>
+          <td>Email: </td>
+          <td><input type="text" name="email" placeholder="Ex. user@mail.com"></td>
+        </tr>
+        <tr>
+          <td>Password: </td>
+          <td><input type="password" name="password" ></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button>Login</button></td>
+        </tr>
+        <tr>
+            <td><p></p><a href="{{ url_for('register') }}">Click here to register</a></td>
+        </tr>
+    </table> 
+    
+    {% if error %}
+        <p>{{error}}</p>
+    {% endif %}
+</form>
+
+{% endblock %}

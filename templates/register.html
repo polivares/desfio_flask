@@ -1,0 +1,54 @@
+{% extends "layout.html"%}
+{% block body %}
+<table style="width:100%">
+    <tr>
+        <td>
+            <form name="lender" action="{{ url_for('register_lender') }}" method="POST">
+                <table>
+                    <tr>
+                        <td><h1>Lender</h1></td>
+                    </tr>
+
+                    {% include "register_layout.html" %}
+
+                    <tr>
+                        <td>Money</td>
+                        <td><input type="number" name="money" min="0" step="100"></td>
+                    </tr>
+                    
+                    {% include "register_button_layout.html" %}
+                </table> 
+            </form>
+        </td>
+        <td>
+            <form name="borrower" action="{{ url_for('register_borrower') }}" method="POST">
+                <table style="width:50%">
+                    <tr>
+                        <td><h1>Borrower</h1></td>
+                    </tr>
+
+                    {% include "register_layout.html" %}
+
+                    <tr>
+                        <td>Need Money for:</td>
+                        <td><input type="text" name="money_for"></td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Description:</td>
+                        <td><textarea name="description" cols="40" rows="5"></textarea></td>
+                    </tr>
+
+                    <tr>
+                        <td>Amount Needed:</td>
+                        <td><input type="number" name="needed_money" min="0" step="100"></td>
+                    </tr>
+
+                    {% include "register_button_layout.html" %}
+                    
+                </table>
+            </form> 
+        </td>
+    </tr>
+</table>
+{% endblock %}
